@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // stop()から参照できるようにStartTimeはstart()の外側で宣言する
+        let StartTime;
+        // スタートボタン
+        function start() {
+            StartTime = new Date();
+        }
+
+        // ストップボタン
+        function stop(time) {
+            let StopTime = new Date();
+            document.getElementById("time").textContent = StopTime.getTime() - StartTime.getTime();
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+        経過時間は<span id="time"></span>ミリ秒です
+    </p>
+    <button onclick="start(start)">スタート</button>
+    <button onclick="stop(start)">ストップ</button>
+</body>
+
+</html>

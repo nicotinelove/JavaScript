@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        let car = {
+            speed: 60,
+            fuel: 40,
+            accelerate: function () {
+                this.speed += 1;
+            },
+            decelerate: function () {
+                this.speed -= 1;
+            },
+            drive: function (length) {
+                this.fuel -= length;
+            },
+        };
+
+        function carData() {
+            document.getElementById("speed").textContent = car.speed;
+            document.getElementById("fuel").textContent = car.fuel;
+        }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="carData()">車のデータ</button>
+    <button onclick="car.decelerate()">減速</button>
+    <button onclick="car.accelerate()">加速</button>
+    <p>車の速さは<span id="speed"></span>kmps</p>
+    <p>車のガソリンは<span id="fuel"></span>L</p>
+</body>
+
+</html>

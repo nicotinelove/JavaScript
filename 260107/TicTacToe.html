@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* マス目のプロパティ */
+        .cell {
+            border: solid black 1px;
+            width: 100px;
+            height: 100px;
+            /* 〇×のフォント */
+            font-size: 50px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        // 盤面の作成
+        function init() {
+            // board要素のオブジェクト化
+            let b = document.getElementById("board")
+            for (let i = 0; i < 3; i++) {
+                let tr = document.createElement("tr");
+                for (let j = 0; j < 3; j++) {
+                    let td = document.createElement("td");
+                    td.className = ("cell");
+                    td.id = "cell" + i + j;
+                    td.onclick = clicked; // クリック時処理
+                    tr.appendChild(td);
+                }
+                b.appendChild(tr);
+            }
+        }
+        // クリック時処理
+        let turn = 1; // 手番
+        function clicked(e) {
+            if (turn == 1) {
+                circle(e);
+                turn *= -1; // 手番を相手に渡す
+            } else {
+                cross(e);
+                turn *= -1;
+            }
+        }
+        //先手番が盤面をクリックすると文字列〇を書き込む
+        function circle(e) {
+            document.getElementById(e.target.id).textContent = "〇";
+        }
+        // 後手番時処理
+        function cross(e) {
+            document.getElementById(e.target.id).textContent = "×";
+        }
+
+    </script>
+</head>
+
+<body onload="init()">
+    <table id="board"></table>
+</body>
+
+</html>

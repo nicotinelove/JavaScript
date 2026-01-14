@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI</title>
+    <script>
+        // 身長と体重を入力値として受け取り、
+        // BMI = 体重kg/(身長m)**2を計算し、その判定結果を出力
+        // 18.5未満なら「痩せすぎ」
+        // 25以上なら「肥満」
+        // その中間は「標準」と出力する
+        function bmi() {
+            let height = document.getElementById("HEIGHT").value;
+            let weight = document.getElementById("WEIGHT").value;
+            let bmi = weight / (height ** 2);
+
+            document.getElementById("BMI").textContent = bmi;
+            if (bmi < 18.5) {
+                document.getElementById("judge").textContent = "痩せすぎ";
+            } else if (bmi < 25) {
+                document.getElementById("judge").textContent = "標準";
+            } else {
+                document.getElementById("judge").textContent = "肥満";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>身長 : <input type="text" id="HEIGHT"> m </p>
+    <p>体重 : <input type="text" id="WEIGHT"> kg </p>
+    <button onclick="bmi()">計算</button>
+    <p>BMI = <span id="BMI"></span> : <span id="judge"></span></p>
+</body>
+
+</html>

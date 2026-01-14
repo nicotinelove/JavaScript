@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function show() {
+            // #value1,value2に入力された値を変数a,bに代入
+            let a = document.getElementById("value1").value;
+            let b = document.getElementById("value2").value;
+            // #s[1-9]に値を出力
+            document.getElementById("s1").textContent = a;
+            document.getElementById("s2").textContent = b;
+            document.getElementById("s3").textContent = Number(a) + Number(b); // Numberで文字列を数値に変換
+            document.getElementById("s4").textContent = a == b; // 論理式を記述するとtrue or falseが取り出せる
+            // 条件分岐
+            if (a > b) {
+                document.getElementById("s5").textContent = "a";
+            } else if (b > a) {
+                document.getElementById("s5").textContent = "b";
+            } else {
+                document.getElementById("s5").textContent = "aとbは等しい";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>a<input type="text" id="value1"></p>
+    <p>b<input type="text" id="value2"></p>
+    <button onclick="show()">show</button>
+    <ul>
+        <li>a = <span id="s1"></span></li>
+        <li>b = <span id="s2"></span></li>
+        <li>a + b = <span id="s3"></span></li>
+        <li>a == b : <span id="s4"></span></li>
+        <li> 大きいのは : <span id="s5"></span></li>
+    </ul>
+</body>
+
+</html>

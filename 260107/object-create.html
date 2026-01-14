@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // 赤、青、緑、黄色、紫を要素として持つ色の配列
+        let colors = [
+            "red",
+            "blue",
+            "green",
+            "yellow",
+            "purple"
+        ];
+        // カウンタ
+        let index = 0;
+
+        function insert() {
+            let parent = document.getElementById("mylist");
+            let item = document.createElement("li");
+            item.textContent = colors[index];
+            item.style.color = colors[index];
+            index = ++index % colors.length;
+            parent.appendChild(item);
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="insert()">挿入</button>
+    <ol id="mylist"></ol>
+</body>
+
+</html>

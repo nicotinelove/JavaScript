@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十二支</title>
+    <script>
+
+
+        // 十二支を計算
+        function junishi(year) {
+            switch (year % 12) {
+                case 0:
+                    return "申";
+                    break;
+                case 1:
+                    return "酉";
+                    break;
+                case 2:
+                    return "戌";
+                    break;
+                case 3:
+                    return "亥";
+                    break;
+                case 4:
+                    return "子";
+                    break;
+                case 5:
+                    return "丑";
+                    break;
+                case 6:
+                    return "寅";
+                    break;
+                case 7:
+                    return "卯";
+                    break;
+                case 8:
+                    return "辰";
+                    break;
+                case 9:
+                    return "巳";
+                    break;
+                case 10:
+                    return "午";
+                    break;
+                case 11:
+                    return "未";
+                    break;
+
+            }
+        }
+
+        function calc() {
+            // 入力値の受け取り
+            let y = document.getElementById("y").value;
+            // 出力処理
+            document.getElementById("year").textContent = y;
+            document.getElementById("eto").textContent = junishi(y);
+        }
+    </script>
+</head>
+
+<body>
+    <p>西暦を入力:<input id="y" type="text"></p>
+    <button onclick="calc()">計算</button>
+    <p><span id="year"></span>年の干支は<span id="eto"></span>です。</p>
+</body>
+
+</html>

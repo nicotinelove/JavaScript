@@ -28,6 +28,14 @@
             timerId = setInterval(elapsed, 1000);
         }
 
+        function reset() {
+            clearInterval(timerId);
+            document.getElementById("min").textContent = 0;
+            document.getElementById("sec").textContent = 0;
+            document.getElementById("lap").textContent = 1;
+            document.getElementById("rest").textContent = "";
+        }
+
         function elapsed() {
             if (isWorking == 1) {
                 // 作業中
@@ -80,10 +88,10 @@
 
 <body>
     <p>
-        Lap<span id="lap"></span> : <span id="min"></span> : <span id="sec"></span><br><span id="rest"></span>
+        Lap<span id="lap"></span> : <span id="min">0</span> : <span id="sec">0</span><br><span id="rest">1</span>
     </p>
     <button onclick="start()">スタート</button>
-    <button onclick="stop()">ストップ</button>
+    <button onclick="reset()">リセット</button>
 </body>
 
 </html>

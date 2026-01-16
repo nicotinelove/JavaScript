@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>porodomo</title>
+    <script>
+        let timerId;
+        let StartTime;
+        let lap = 1; // lap数
+        const LAP_LIMIT = 3; // lap上限
+        const SET_TIME = 10000; // 制限時間
+
+        function start() {
+            let elapsedTime;
+            // 開始時間オブジェクト
+            StartTime = new Date();
+            // 現在時間オブジェクト
+            clearInterval(timerId);
+            elapsed();
+            timerId = setInterval(elapsed, 1000);
+        }
+
+        function elapsed() {
+            if (lap <= LAP_LIMIT) {
+                // lapが上限以下のとき
+                let NowTime = new Date();
+                let elapsedTime = NowTime.getTime() - StartTime.getTime();
+                let time = SET_TIME - elapsedTime;
+                if (time > 0) {
+                    // 経過時間が設定時間未満の時
+                    let min = Math.floor(time / 60000);
+                    let sec = Math.floor((time - min * 60000) / 1000);
+                    document.getElementById("lap").textContent = lap;
+                    document.getElementById("min").textContent = min;
+                    document.getElementById("sec").textContent = sec;
+                } else {
+                    // 経過時間が設定時間以上のとき
+                    lap += 1;
+                    StartTime = new Date();
+                }
+            } else {
+                // lapが上限を超えたとき
+                clearInterval(timerId);
+                alert("終了しました");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+        Lap<span id="lap"></span> : <span id="min"></span> : <span id="sec"></span>
+    </p>
+    <button onclick="start()">スタート</button>
+    <button onclick="stop()">ストップ</button>
+</body>
+
+</html>

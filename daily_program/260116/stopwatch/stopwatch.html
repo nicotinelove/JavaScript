@@ -9,26 +9,30 @@
     <title>Time</title>
     <link rel="stylesheet" href="style.css">
     <script>
+        // 起動中のタイマーのID
         let timerId;
+        // 開始時間
         let startHour, startMin, startSec;
-
+        //タイマーの起動処理
         function startTimer() {
-            let StartTime = new Date();
+            let StartTime = new Date(); // Dateクラスで開始時間を作成
+            // 開始時間の取得
             startHour = StartTime.getHours();
             startMin = StartTime.getMinutes();
             startSec = StartTime.getSeconds();
 
-            clearInterval(timerId);
-            time();
-            timerId = setInterval(time, 1000);
+            clearInterval(timerId); // 起動中のタイマーの停止
+            time(); // タイマーの起動
+            timerId = setInterval(time, 1000); // 1秒おきにタイマーを更新
         }
-
+        // タイマーの停止処理
         function stopTimer() {
-            clearInterval(timerId);
+            clearInterval(timerId); // タイマーの停止
         }
-
+        // 経過時間の表示
         function time() {
-            let Time = new Date();
+            let Time = new Date(); // Dateクラスで現在時間の作成
+            // 経過時間の計算結果をdocumentオブジェクトに渡す
             document.getElementById("hour").textContent = Time.getHours() - startHour;
             document.getElementById("min").textContent = Time.getMinutes() - startMin;
             document.getElementById("sec").textContent = Time.getSeconds() - startSec;

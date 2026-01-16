@@ -8,12 +8,18 @@
     <script>
         let timerId;
         let StartTime;
+        let NowTime;
+        let elapsedTime;
+        let time;
+        let min;
+        let sec;
         let lap = 1; // lap数
+        let isWorking = 1; // 作業中フラグ
         const LAP_LIMIT = 3; // lap上限
-        const SET_TIME = 10000; // 制限時間
+        const SET_TIME = 15000; // 制限時間
+        const REST_TIME = 10000;
 
         function start() {
-            let elapsedTime;
             // 開始時間オブジェクト
             StartTime = new Date();
             // 現在時間オブジェクト
@@ -23,27 +29,48 @@
         }
 
         function elapsed() {
-            if (lap <= LAP_LIMIT) {
-                // lapが上限以下のとき
-                let NowTime = new Date();
-                let elapsedTime = NowTime.getTime() - StartTime.getTime();
-                let time = SET_TIME - elapsedTime;
+            if (isWorking == 1) {
+                if (lap <= LAP_LIMIT) {
+                    // lapが上限以下のとき
+                    NowTime = new Date();
+                    elapsedTime = NowTime.getTime() - StartTime.getTime();
+                    time = SET_TIME - elapsedTime;
+                    if (time > 0) {
+                        // 経過時間が設定時間未満の時
+                        min = Math.floor(time / 60000);
+                        sec = Math.floor((time - min * 60000) / 1000);
+                        document.getElementById("lap").textContent = lap;
+                        document.getElementById("min").textContent = min;
+                        document.getElementById("sec").textContent = sec;
+                        document.getElementById("rest").textContent = "";
+                    } else {
+                        // 経過時間が設定時間以上のとき
+                        lap += 1;
+                        isWorking = 0;
+                        StartTime = new Date();
+                    }
+                } else {
+                    // lapが上限を超えたとき
+                    clearInterval(timerId);
+                    alert("終了しました");
+                }
+            } else {
+                NowTime = new Date();
+                elapsedTime = NowTime.getTime() - StartTime.getTime();
+                time = REST_TIME - elapsedTime;
                 if (time > 0) {
                     // 経過時間が設定時間未満の時
-                    let min = Math.floor(time / 60000);
-                    let sec = Math.floor((time - min * 60000) / 1000);
+                    min = Math.floor(time / 60000);
+                    sec = Math.floor((time - min * 60000) / 1000);
                     document.getElementById("lap").textContent = lap;
                     document.getElementById("min").textContent = min;
                     document.getElementById("sec").textContent = sec;
+                    document.getElementById("rest").textContent = "rest now.";
                 } else {
                     // 経過時間が設定時間以上のとき
-                    lap += 1;
+                    isWorking = 1;
                     StartTime = new Date();
                 }
-            } else {
-                // lapが上限を超えたとき
-                clearInterval(timerId);
-                alert("終了しました");
             }
         }
     </script>
@@ -51,7 +78,7 @@
 
 <body>
     <p>
-        Lap<span id="lap"></span> : <span id="min"></span> : <span id="sec"></span>
+        Lap<span id="lap"></span> : <span id="min"></span> : <span id="sec"></span><br><span id="rest"></span>
     </p>
     <button onclick="start()">スタート</button>
     <button onclick="stop()">ストップ</button>

@@ -1,0 +1,47 @@
+<!-- これはブラウザ上にストップウォッチを表示するプログラムです -->
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        let timerId;
+        let startHour, startMin, startSec;
+
+        function startTimer() {
+            let StartTime = new Date();
+            startHour = StartTime.getHours();
+            startMin = StartTime.getMinutes();
+            startSec = StartTime.getSeconds();
+
+            clearInterval(timerId);
+            time();
+            timerId = setInterval(time, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerId);
+        }
+
+        function time() {
+            let Time = new Date();
+            document.getElementById("hour").textContent = Time.getHours() - startHour;
+            document.getElementById("min").textContent = Time.getMinutes() - startMin;
+            document.getElementById("sec").textContent = Time.getSeconds() - startSec;
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+        <span id="hour"></span> 時 <span id="min"></span> 分 <span id="sec"></span> 秒
+    </p>
+    <button onclick="startTimer()">スタート</button>
+    <button onclick="stopTimer()">ストップ</button>
+</body>
+
+</html>

@@ -9,10 +9,10 @@
         let timerId;
         let StartTime;
         let NowTime;
-        let elapsedTime;
-        let time;
-        let min;
-        let sec;
+        let elapsedTime; //経過時間
+        let time; // 残り時間s
+        let min; // id="min"に渡す値
+        let sec; // id="sec"に渡す値
         let lap = 1; // lap数
         let isWorking = 1; // 作業中フラグ
         const LAP_LIMIT = 3; // lap上限
@@ -30,6 +30,7 @@
 
         function elapsed() {
             if (isWorking == 1) {
+                // 作業中
                 if (lap <= LAP_LIMIT) {
                     // lapが上限以下のとき
                     NowTime = new Date();
@@ -55,11 +56,12 @@
                     alert("終了しました");
                 }
             } else {
+                // 休憩中
                 NowTime = new Date();
                 elapsedTime = NowTime.getTime() - StartTime.getTime();
                 time = REST_TIME - elapsedTime;
                 if (time > 0) {
-                    // 経過時間が設定時間未満の時
+                    // 経過時間が休憩時間未満の時
                     min = Math.floor(time / 60000);
                     sec = Math.floor((time - min * 60000) / 1000);
                     document.getElementById("lap").textContent = lap;
@@ -67,7 +69,7 @@
                     document.getElementById("sec").textContent = sec;
                     document.getElementById("rest").textContent = "rest now.";
                 } else {
-                    // 経過時間が設定時間以上のとき
+                    // 経過時間が休憩時間以上のとき
                     isWorking = 1;
                     StartTime = new Date();
                 }
